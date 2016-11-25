@@ -69,6 +69,9 @@ En el archivo de configuración de NGINX normalmente ubicado en `/etc/nginx/ngin
         }
     }
 
+En `<DIRECTORIO A CARPETA static>` se debe completar con la ruta absoluta a la carpeta dentro del proyecto `django/static` y toda carpeta de la ruta debe tener permisos de lectura, de otra manera el servidor nginx devuelve un error 403 cuando intenta acceder al recurso.  
+Lo mas facil es copiar esta carpeta static del proyecto a el directorio `/var/www/nexa` o alguno similar y poner esta ruta en `<DIRECTORIO A CARPETA static>`.
+
 Luego se reinicia el servidor nginx y se puede levantar la aplicación ejecutando el comando `gunicorn nexa.wsgi` en el mismo directorio del proyecto donde se encuentra el archivo `manage.py`.
 
 
