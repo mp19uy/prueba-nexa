@@ -43,6 +43,9 @@ El **client id** y **client secret** obtenidos se agregan en el archivo nexa/set
 
 ####6. Iniciar la aplicación
 Con todo lo anterior configurado ya se puede iniciar la aplicación.  
+Antes de levantar la aplicación puede ser necesarion ejecutar el comando: `./manage.py migrate` para configurar correctamente la base de datos.
+
+
 Para hacer el deploy, se usó Gunicorn + NGINX:  
 
 En el archivo de configuración de NGINX normalmente ubicado en `/etc/nginx/nginx.conf` se debe agregar lo siguiente para hacer un proxy con gunicorn:
@@ -66,5 +69,8 @@ En el archivo de configuración de NGINX normalmente ubicado en `/etc/nginx/ngin
         }
     }
 
-Luego se reinicia el servidor nginx y se puede levantar la aplicación ejecutando el comando `gunicorn nexa.wsgi`en el mismo directorio del proyecto donde se encuentra el archivo `manage.py`.
+Luego se reinicia el servidor nginx y se puede levantar la aplicación ejecutando el comando `gunicorn nexa.wsgi` en el mismo directorio del proyecto donde se encuentra el archivo `manage.py`.
+
+
+La aplicación ya es accesible en la url http://localhost/todo
 `
