@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block main %}
+{% verbatim %}
+<div ng-app="app">
+  	<div id="list" ng-controller="MainCtrl" class="well well-lg">
+	  	<div id="form" ng-switch="showForm" ng-controller="FormCtrl">
+	  		<div ng-switch-when="true"> 
+	  			<form class="form-inline">	
+	  				<div class="form-group">
+	  					<input type="text" class="form-control" id="task-text" placeholder="Task" ng-model="description">
+						</div>
+	  				<button class="btn btn-success" ng-click="addTask(description); toggle();">Add</button>  <button class="btn btn-danger" ng-click="toggle()">Cancel</button>
+					</form>
+	  		</div>
+			<div ng-switch-default>
+				<button class="btn btn-default" ng-click="toggle()">+ Add Task</button>
+			</div>
+	  	</div>
+  		<table id="tabla" class="table table-bordered">
+		  <thead>
+		    <tr>
+		      <th>Select</th>
+		      <th>Task</th>
+		      <th>Delete</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr ng-repeat="task in tasks">
+		      <td> <input type="checkbox" ng-model="task.is_done" ng-checked="{{task.is_done}}" ng-change="toggleDone(task)"> </td>
+		      <td ng-class="{done: task.is_done}">{{ task.desc }}</td>
+		      <td>
+		      	<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="removeTask($index, task.id)">&times;</button> 
+		      </td>
+		    </tr>
+		  </tbody>
+		</table>
+  	</div>
+</div> <!-- [ng-app] -->
+{% endverbatim %}
+{% endblock %}

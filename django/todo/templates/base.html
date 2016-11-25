@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>{% block title %}Nexa TodoList{% endblock %}</title>
+   {% load static %}
+   <!-- CSS -->
+  <link href="{% static "css/style.css" %}" rel="stylesheet" >
+
+  <!-- Fuente Arimo -->
+  <link href="https://fonts.googleapis.com/css?family=Arimo:700" rel="stylesheet"> 
+
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity=" sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+   <![endif]-->
+ </head>
+ <body>
+  <div id="main">
+    <div id="header">
+      <div id="top" class="row">
+        <h2 id="title" class="col-md-8 col-xs-8 col-sm-8">Nexa TodoList</h2>
+        {% if user and not user.is_anonymous %}
+        <div id="logout" class="col-md-4 col-xs-4 col-sm-4" ><a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a></div>
+      </div>
+      <div class="row">
+        <div id="welcome" class="col-md-12">Welcome: {{user.email}}</div>
+        {% endif %}
+      </div>
+    </div>
+    <hr id="rule">
+    {% if user and not user.is_anonymous %}
+      {% block main %}{% endblock %}
+    {% else %}
+      <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login with Google</a>
+    {% endif %}
+
+  </div>
+  <script>
+    var csrftoken = '{{ csrf_token }}';
+  </script>
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- Angular JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  
+  <!-- Angular APP -->
+  <script src="{% static "app/app.js" %}"></script>
+
+ </body>
+</html>
