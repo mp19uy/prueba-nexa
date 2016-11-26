@@ -76,4 +76,3 @@ Luego se reinicia el servidor nginx y se puede levantar la aplicación ejecutand
 
 
 La aplicación ya es accesible en la url http://localhost/todo
-`
